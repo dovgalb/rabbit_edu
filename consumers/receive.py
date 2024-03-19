@@ -1,7 +1,7 @@
 import pika  # Импорт библиотеки pika для работы с RabbitMQ
 
 # Устанавливаем соединение с RabbitMQ брокером
-connection = pika.BlockingConnection(pika.URLParameters('amqp://admin:admin@localhost:5672'))
+connection = pika.BlockingConnection(pika.URLParameters('amqps://gjbweibk:eL88hOkPdDTTII1I8d7mtO6nTGZscunX@cow.rmq2.cloudamqp.com/gjbweibk'))
 channel = connection.channel()
 
 channel.queue_declare(queue='hello')  # Объявляем очередь с именем 'hello', если такая очередь еще не существует

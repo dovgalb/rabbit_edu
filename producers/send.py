@@ -1,7 +1,7 @@
 import pika  # Импорт библиотеки pika для работы с RabbitMQ
 
 # Устанавливаем соединение с RabbitMQ брокером
-connection = pika.BlockingConnection(pika.URLParameters('amqp://admin:admin@localhost:5672'))
+connection = pika.BlockingConnection(pika.URLParameters('amqps://gjbweibk:eL88hOkPdDTTII1I8d7mtO6nTGZscunX@cow.rmq2.cloudamqp.com/gjbweibk'))
 
 # Создаем канал для обмена данными с брокером
 channel = connection.channel()
@@ -10,7 +10,7 @@ channel = connection.channel()
 channel.queue_declare(queue='hello')
 
 # Цикл, который будет повторяться 100 раз
-for i in range(1):
+for i in range(5):
     # Публикуем сообщение с текстом 'Hello World!' в очередь 'hello'
     channel.basic_publish(exchange='', routing_key='hello', body='Hello World!')
     count_cycles = i + 1
