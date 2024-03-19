@@ -17,7 +17,7 @@ def callback(ch, method, properties, body):
     ch.basic_ack(delivery_tag = method.delivery_tag)
 
 
-
+channel.basic_qos(prefetch_count=1)
 channel.basic_consume(on_message_callback=callback, queue='task_queue')  # Устанавливаем consumer (потребителя) для очереди
                                                              # 'hello' с указанием функции обратного вызова
 
