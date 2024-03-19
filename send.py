@@ -1,33 +1,21 @@
-import pika
+import pika  # Импорт библиотеки pika для работы с RabbitMQ
 
-
+# Устанавливаем соединение с RabbitMQ брокером
 connection = pika.BlockingConnection(pika.URLParameters('amqp://admin:admin@localhost:5672'))
 
+# Создаем канал для обмена данными с брокером
 channel = connection.channel()
 
+# Объявляем очередь с именем 'hello', если такая очередь еще не существует
 channel.queue_declare(queue='hello')
-channel.basic_publish(exchange='',
-                      routing_key='hello',
-                      body='Hello World!')
 
-for i in range(100):
-    print("[x] Sent 'Hello World!'")
-
-connection.close()
+# Цикл, который будет повторяться 100 раз
+for i in range(1):
+    # Публикуем сообщение с текстом 'Hello World!' в очередь 'hello'
+    channel.basic_publish(exchange='', routing_key='hello', body='Hello World!')
+    count_cycles = i + 1
 
 
-# import pika
-#
-# params = pika.URLParameters('amqps://gjbweibk:eL88hOkPdDTTII1I8d7mtO6nTGZscunX@cow.rmq2.cloudamqp.com/gjbweibk')
-# connection = pika.BlockingConnection(params)
-#
-# channel = connection.channel()
-#
-# channel.queue_declare(queue='hello')
-# channel.basic_publish(exchange='',
-#                       routing_key='hello',
-#                       body='Hello World!')
-#
-# print(" [x] Sent 'Hello World!'")
-#
-# connection.close()
+print(f"[x] Sent 'Hello World!' [{count_cycles} times]")  # Выводим сообщение об отправке сообщения в консоль
+
+connection.close()  # Закрываем соединение с брокером RabbitMQ после отправки сообщений
