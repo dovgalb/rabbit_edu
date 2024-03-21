@@ -1,7 +1,7 @@
 import pika  # Импорт библиотеки pika для работы с RabbitMQ
 
 # Устанавливаем соединение с RabbitMQ брокером
-connection = pika.BlockingConnection(pika.URLParameters('amqps://gjbweibk:eL88hOkPdDTTII1I8d7mtO6nTGZscunX@cow.rmq2.cloudamqp.com/gjbweibk'))
+connection = pika.BlockingConnection(pika.URLParameters('amqp://admin:admin@localhost:5672'))
 
 # Создаем канал для обмена данными с брокером
 channel = connection.channel()
